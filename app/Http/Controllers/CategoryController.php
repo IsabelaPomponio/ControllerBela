@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bebela;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class BebelaController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $bebelas = Bebela::all();
-        return view('bebelas.index', compact('bebelas'));
+        $categories = Category::all();
+        return view('categories.index', compact('categories'));
     }
 
     public function show(string $id)
     {
-        if (!$bebela = Bebela::find($id)) {
-            return redirect()->route('bebela.index');
+        if (!$category = Category::find($id)) {
+            return redirect()->route('categories.index');
         }
-        return view('bebelas.show', compact('bebela'));
+        return view('categories.show', compact('category'));
     }
 
     /**
@@ -34,12 +34,12 @@ class BebelaController extends Controller
             'description' => 'required|string|max:255'
         ]);
 
-        Bebela::create([
+        Category::create([
             'name' => $request->name,
             'description' => $request->description,
         ]);
 
-        return redirect()->route('bebelas');
+        return redirect()->route('categories');
     }
 
     /**
@@ -47,11 +47,11 @@ class BebelaController extends Controller
      */
     public function edit(string $id)
     {
-        if (!$bebela = Bebela::find($id)) {
-            return redirect()->route('bebelas');
+        if (!$category = Category::find($id)) {
+            return redirect()->route('categories');
         }
 
-        return view('bebelas.edit', compact('category'));
+        return view('categories.edit', compact('category'));
 
     }
 
@@ -60,15 +60,15 @@ class BebelaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if (!$category = Bebela::find($id)) {
-            return redirect()->route('bebelas');
+        if (!$category = Category::find($id)) {
+            return redirect()->route('categories');
         }
 
         $data = $request->all();
 
         $category->update($data);
 
-        return redirect()->route('bebelas');
+        return redirect()->route('categories');
     }
 
     /**
@@ -76,12 +76,12 @@ class BebelaController extends Controller
      */
     public function destroy(string $id)
     {
-        if (!$category = Bebela::find($id)) {
-            return redirect()->route('bebelas');
+        if (!$category = Category::find($id)) {
+            return redirect()->route('categories');
         }
 
         $category->delete();
 
-        return redirect()->route('bebelas');
+        return redirect()->route('categories');
     }
 }

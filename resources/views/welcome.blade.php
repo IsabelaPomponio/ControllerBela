@@ -21,6 +21,15 @@
     </head>
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
         <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
+                <!-- Navbar -->
+                <nav>
+                    <div class="container">
+                        <a href="{{ route('users.index') }}">Usuários</a>
+                        <a href="{{ route('categories.index') }}">Categorias</a>
+                        <a href="{{ route('products.index') }}">Produtos</a>
+                        <a href="{{ route('bebelas.index') }}">Bebelas</a>
+                    </div>
+                </nav>
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
                     @auth
@@ -273,5 +282,7 @@
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif
+
+        
     </body>
 </html>
