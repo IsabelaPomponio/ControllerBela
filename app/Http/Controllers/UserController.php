@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();  // Obtém todos os usuários do banco
-        return view('usuarios.index', compact('users'));
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        return view('users.create');
     }
 
     /**
@@ -52,7 +52,7 @@ class UserController extends Controller
         if (!$user = User::find($id)) {
             return redirect()->route('users.index');
         }
-        return view('usuarios.show', compact('user'));
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -63,7 +63,7 @@ class UserController extends Controller
         if (!$user = User::find($id)) {
             return redirect()->route('users.index');
         }
-        return view('usuarios.edit', compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     /**
