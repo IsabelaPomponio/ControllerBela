@@ -16,10 +16,21 @@ class BebelaController extends Controller
         return view('bebelas.index', compact('bebelas'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('bebelas.create');
+    }
+
+    /**
+     * Display the specified resource.
+     */
     public function show(string $id)
     {
         if (!$bebela = Bebela::find($id)) {
-            return redirect()->route('bebela.index');
+            return redirect()->route('bebelas.index');
         }
         return view('bebelas.show', compact('bebela'));
     }
@@ -39,7 +50,7 @@ class BebelaController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('bebelas');
+        return redirect()->route('bebelas.index');
     }
 
     /**
@@ -48,11 +59,10 @@ class BebelaController extends Controller
     public function edit(string $id)
     {
         if (!$bebela = Bebela::find($id)) {
-            return redirect()->route('bebelas');
+            return redirect()->route('bebelas.index');
         }
 
-        return view('bebelas.edit', compact('category'));
-
+        return view('bebelas.edit', compact('bebela'));
     }
 
     /**
@@ -60,15 +70,15 @@ class BebelaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if (!$category = Bebela::find($id)) {
-            return redirect()->route('bebelas');
+        if (!$bebela = Bebela::find($id)) {
+            return redirect()->route('bebelas.index');
         }
 
         $data = $request->all();
 
-        $category->update($data);
+        $bebela->update($data);
 
-        return redirect()->route('bebelas');
+        return redirect()->route('bebelas.index');
     }
 
     /**
@@ -76,12 +86,12 @@ class BebelaController extends Controller
      */
     public function destroy(string $id)
     {
-        if (!$category = Bebela::find($id)) {
-            return redirect()->route('bebelas');
+        if (!$bebela = Bebela::find($id)) {
+            return redirect()->route('bebelas.index');
         }
 
-        $category->delete();
+        $bebela->delete();
 
-        return redirect()->route('bebelas');
+        return redirect()->route('bebelas.index');
     }
 }

@@ -31,7 +31,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -46,7 +45,7 @@ class ProductController extends Controller
             'id_category' => $request->id_category,
         ]);
 
-        return redirect()->route('products');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -55,7 +54,7 @@ class ProductController extends Controller
     public function show(string $id)
     {
         if (!$product = Product::find($id)){
-            return redirect()->route('products');
+            return redirect()->route('products.index');
         }
         return view('products.show', compact('product'));
     }
@@ -66,7 +65,7 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         if(!$product = Product::find($id)){
-            return redirect()->route('products');
+            return redirect()->route('products.index');
         }
 
         $categories = Category::all();
@@ -80,14 +79,14 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         if (!$product = Product::find($id)){
-            return redirect()->route('products');
+            return redirect()->route('products.index');
         }
 
         $data = $request->all();
         
         $product->update($data);
 
-        return redirect()->route('products');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -96,10 +95,11 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         if (!$product = Product::find($id)) {
-            return redirect()->route('products');
+            return redirect()->route('products.index');
         }
 
         $product->delete();
-        return redirect()->route('products');
+
+        return redirect()->route('products.index');
     }
 }

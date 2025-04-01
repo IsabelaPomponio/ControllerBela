@@ -16,6 +16,17 @@ class CategoryController extends Controller
         return view('categories.index', compact('categories'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('categories.create');
+    }
+
+    /**
+     * Display the specified resource.
+     */
     public function show(string $id)
     {
         if (!$category = Category::find($id)) {
@@ -39,7 +50,7 @@ class CategoryController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('categories');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -48,11 +59,10 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         if (!$category = Category::find($id)) {
-            return redirect()->route('categories');
+            return redirect()->route('categories.index');
         }
 
         return view('categories.edit', compact('category'));
-
     }
 
     /**
@@ -61,14 +71,14 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         if (!$category = Category::find($id)) {
-            return redirect()->route('categories');
+            return redirect()->route('categories.index');
         }
 
         $data = $request->all();
 
         $category->update($data);
 
-        return redirect()->route('categories');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -77,11 +87,11 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         if (!$category = Category::find($id)) {
-            return redirect()->route('categories');
+            return redirect()->route('categories.index');
         }
 
         $category->delete();
 
-        return redirect()->route('categories');
+        return redirect()->route('categories.index');
     }
 }

@@ -86,7 +86,7 @@ class UserController extends Controller
             'password' => $request->password ? bcrypt($request->password) : $user->password,  // Atualiza a senha somente se fornecida
         ]);
 
-        return redirect()->route('users.show', $user->id);
+        return redirect()->route('users.index');
     }
 
     /**
@@ -99,6 +99,7 @@ class UserController extends Controller
         }
 
         $user->delete();
+
         return redirect()->route('users.index');
     }
 }
